@@ -3,14 +3,14 @@
 {% block content %}
 <h2>Конвертор в PDF</h2>
 <div class="container">
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" action="convert_to_pdf" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="input-group mb-3">
             <input type="file" name="images" class="form-control" multiple>
         </div>
         <button id="submit-image" type="submit" class="btn btn-primary mb-3">
             <span id="loading-indicator" class="spinner-border spinner-border-sm" aria-hidden="true" style="display: none;"></span>
-            <span role="status">Отправить</span>
+            <span role="status">Сконвертировать</span>
         </button>
     </form>
 </div>
