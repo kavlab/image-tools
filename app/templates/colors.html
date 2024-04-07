@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Загрузите изображение</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <input type="file" name="image" class="form-control" id="inputGroupFile01">
+          </div>          
+        <button type="submit" class="btn btn-primary mb-3">Отправить</button>
+    </form>
+    <img id="image" src="data:image;base64,{{ encoded_image }}" class="img-fluid" alt="Загрузите изображение">
+</div>
+{% if colors %}
+<div class="container">
+    {% for color in colors %}
+    <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+        <div class="card-header" style="background-color: {{ color }};">Header</div>
+    </div>      
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
