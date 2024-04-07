@@ -13,12 +13,16 @@
     <img id="image" src="data:image;base64,{{ encoded_image }}" class="img-fluid" alt="Загрузите изображение">
 </div>
 {% if colors %}
-<div class="container">
-    {% for color in colors %}
-    <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header" style="background-color: {{ color }};">Header</div>
-    </div>      
-    {% endfor %}
+<div class="container text-center" style="margin-top: 20px;">
+    <div class="row">
+        {% for color in colors %}
+        <div class="col">
+            <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card-header" style="background-color: {{ color }};">{{ color }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endif %}
 {% endblock %}

@@ -5,6 +5,10 @@ from django.shortcuts import render
 from .tools import determine_colors, image_from_base64
 
 
+def rgb2hex(r, g, b):
+    return "#{:02x}{:02x}{:02x}".format(int(r), int(g), int(b))
+
+
 def colors_page(request):
     encoded_image = None
     colors = None
@@ -15,7 +19,7 @@ def colors_page(request):
         colors = determine_colors(
             image_from_base64(encoded_image)
         )
-        colors = [f'rgb({x[1][0]}, {x[1][1]}, {x[1][2]})' for x in colors]
+        colors = [rgb2hex(x[1][0], x[1][1], x[1][2]) for x in colors]
     return render(
         request,
         'colors.html',
