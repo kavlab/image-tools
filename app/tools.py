@@ -38,3 +38,14 @@ def determine_colors(image: Image) -> tuple:
     )
 
     return colors
+
+
+def rgb2hex(r, g, b):
+    if (r + g + b) / 3 > 220:
+        text_color = '#212529'
+    else:
+        text_color = '#fff'
+    return {
+        'text': text_color,
+        'bg': '#{:02x}{:02x}{:02x}'.format(int(r), int(g), int(b))
+    }

@@ -2,18 +2,17 @@ import base64
 
 from django.shortcuts import render
 
-from .tools import determine_colors, image_from_base64
+from .tools import determine_colors, image_from_base64, rgb2hex
 
 
-def rgb2hex(r, g, b):
-    if (r + g + b) / 3 > 220:
-        text_color = '#212529'
-    else:
-        text_color = '#fff'
-    return {
-        'text': text_color,
-        'bg': '#{:02x}{:02x}{:02x}'.format(int(r), int(g), int(b))
-    }
+def home_page(request):
+    return render(
+        request,
+        'home.html',
+        {
+            'page1_active': '',
+            'page2_active': '',
+        })
 
 
 def colors_page(request):
