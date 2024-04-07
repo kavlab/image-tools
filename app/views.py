@@ -6,7 +6,14 @@ from .tools import determine_colors, image_from_base64
 
 
 def rgb2hex(r, g, b):
-    return "#{:02x}{:02x}{:02x}".format(int(r), int(g), int(b))
+    if (r + g + b) / 3 > 220:
+        text_color = '#212529'
+    else:
+        text_color = '#fff'
+    return {
+        'text': text_color,
+        'bg': '#{:02x}{:02x}{:02x}'.format(int(r), int(g), int(b))
+    }
 
 
 def colors_page(request):
@@ -24,6 +31,8 @@ def colors_page(request):
         request,
         'colors.html',
         {
+            'page1_active': 'active',
+            'page2_active': '',
             'encoded_image': encoded_image,
             'colors': colors,
         }
@@ -33,4 +42,10 @@ def colors_page(request):
 def pdf_page(request):
     if request.method == 'POST' and request.FILES.getlist('images'):
         images = request.FILES.getlist('images')
-    return render(request, 'pdf.html')
+    return render(
+        request,
+        'pdf.html',
+        {
+            'page1_active': '',
+            'page2_active': 'active',
+        })

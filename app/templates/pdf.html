@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h2>Конвертор в PDF</h2>
 <div class="container">
-    <h2>Загрузите несколько изображений</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="images" multiple>
-        <button type="submit">Отправить</button>
+        <div class="input-group mb-3">
+            <input type="file" name="images" class="form-control" multiple>
+        </div>
+        <button id="submit-image" type="submit" class="btn btn-primary mb-3">
+            <span id="loading-indicator" class="spinner-border spinner-border-sm" aria-hidden="true" style="display: none;"></span>
+            <span role="status">Отправить</span>
+        </button>
     </form>
 </div>
 {% endblock %}

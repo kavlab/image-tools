@@ -1,28 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h2>Определение основных цветов изображения</h2>
 <div class="container">
-    <h2>Загрузите изображение</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="input-group mb-3">
-            <input type="file" name="image" class="form-control" id="inputGroupFile01">
+            <input type="file" name="image" class="form-control">
           </div>          
-        <button type="submit" class="btn btn-primary mb-3">Отправить</button>
+        <button id="submit-image" type="submit" class="btn btn-primary mb-3">
+            <span id="loading-indicator" class="spinner-border spinner-border-sm" aria-hidden="true" style="display: none;"></span>
+            <span role="status">Отправить</span>
+        </button>
     </form>
+    <script>
+        document.getElementById('submit-image').addEventListener('click', function() {
+            document.getElementById('loading-indicator').style = 'display: inherit;'
+        });
+    </script>
+    {% if colors %}
+    <div class="container text-center" style="margin-top: 10px;">
+        <div class="row">
+            {% for color in colors %}
+            <div class="col">
+                <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                    <div class="card-header" style="color: {{ color.text }}; background-color: {{ color.bg }};">{{ color.bg }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
     <img id="image" src="data:image;base64,{{ encoded_image }}" class="img-fluid" alt="Загрузите изображение">
 </div>
-{% if colors %}
-<div class="container text-center" style="margin-top: 20px;">
-    <div class="row">
-        {% for color in colors %}
-        <div class="col">
-            <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
-                <div class="card-header" style="background-color: {{ color }};">{{ color }}</div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
 {% endblock %}
