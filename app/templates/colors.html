@@ -3,6 +3,7 @@
 {% block content %}
 <h2>Определение основных цветов изображения</h2>
 <div class="container">
+    <p>После отправки изображения на сервер и его обработки будут выведены коды пяти основных цветов</p>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="input-group mb-3">
