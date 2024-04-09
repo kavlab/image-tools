@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Конвертор в PDF</h2>
+<h2>Конвертор изображений в PDF</h2>
 <div class="container">
+    <p>Выберите один или несколько файлов изображений и нажмите кнопку Сконвертировать. Выбранные изображения сконвертируются в один PDF файл. После этого автоматически запустится загрузка этого файла.</p>
     <form method="post" action="convert_to_pdf" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="input-group mb-3">
