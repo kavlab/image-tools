@@ -1,0 +1,37 @@
+version: '3'
+services:
+  image-tools-nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    container_name: image-tools-nginx
+    restart: unless-stopped
+    networks:
+      - network-image-tools
+    ports:
+      - "8070:80"
+    volumes:
+      - image-tools-static:/app/static
+    depends_on:
+      - image-tools-web
+
+  image-tools-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: image-tools-web:latest
+    container_name: image-tools-web
+    restart: unless-stopped
+    env_file:
+      - ./default.env
+    command: "gunicorn -c gunicorn.py imagetools.wsgi"
+    working_dir: /app
+    networks:
+      - network-image-tools
+    volumes:
+      - image-tools-static:/app/static
+
+volumes:
+  image-tools-static: 
+networks:
+  network-image-tools:
